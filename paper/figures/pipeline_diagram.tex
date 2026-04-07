@@ -1,0 +1,57 @@
+% TikZ evaluation pipeline diagram
+% Include in main.tex via \input{figures/pipeline_diagram}
+\begin{tikzpicture}[
+    node distance=1.2cm and 1.8cm,
+    box/.style={rectangle, rounded corners=4pt, minimum width=2.8cm, minimum height=0.9cm,
+                text centered, font=\small, draw, thick},
+    databox/.style={box, fill=blue!15, draw=blue!60},
+    modelbox/.style={box, fill=green!15, draw=green!60},
+    scorebox/.style={box, fill=orange!15, draw=orange!60},
+    analysisbox/.style={box, fill=purple!15, draw=purple!60},
+    arrow/.style={-Stealth, thick},
+]
+
+% Data stage (left column)
+\node[databox] (medqa) {MedQA Dataset\\(HuggingFace)};
+\node[databox, below=of medqa] (sampler) {Stratified\\Sampler};
+\node[databox, below=of sampler] (questions) {200 Questions\\(100 Step 1,\\100 Step 2 CK)};
+
+% Model stage (center column)
+\node[modelbox, right=of sampler] (prompt) {Standardized\\Zero-Shot Prompt\\(temperature=0)};
+\node[modelbox, above=0.6cm of prompt] (models) {8 LLMs\\GPT-4o, Claude, Gemini,\\Llama, DeepSeek};
+\node[modelbox, below=0.6cm of prompt] (response) {Response +\\Selected Answer\\(A/B/C/D)};
+
+% Scoring stage (right column)
+\node[scorebox, right=of prompt] (scorer) {Accuracy\\Scorer};
+\node[scorebox, above=0.6cm of scorer] (cache) {Disk Cache\\(diskcache)};
+\node[scorebox, below=0.6cm of scorer] (expert) {Expert Annotator\\(Blessie)\\Score 1--5};
+
+% Analysis stage (bottom)
+\node[analysisbox, below=2.5cm of prompt] (stats) {Statistical Analysis:\\McNemar · Chi-square\\Holm-Bonferroni · Cohen's h};
+\node[analysisbox, left=1.2cm of stats] (imganalysis) {IMG Gap\\Analysis};
+\node[analysisbox, right=1.2cm of stats] (figures) {Paper Figures\\\& LaTeX Tables};
+
+% Arrows — data stage
+\draw[arrow] (medqa) -- (sampler);
+\draw[arrow] (sampler) -- (questions);
+\draw[arrow] (questions) -- (prompt);
+
+% Arrows — model stage
+\draw[arrow] (models) -- (prompt);
+\draw[arrow] (prompt) -- (response);
+\draw[arrow] (response) -- (scorer);
+\draw[arrow, dashed] (scorer) -- (cache);
+
+% Arrows — to analysis
+\draw[arrow] (scorer) -- (stats);
+\draw[arrow] (expert) -- (stats);
+\draw[arrow] (stats) -- (imganalysis);
+\draw[arrow] (stats) -- (figures);
+
+% Legend
+\node[below=0.3cm of figures, font=\scriptsize, text=blue!70] {Blue = Data};
+\node[right=0.1cm of figures, below=0.3cm of figures, font=\scriptsize, text=green!60!black] {Green = Models};
+\node[below=0.6cm of figures, font=\scriptsize, text=orange!80!black] {Orange = Scoring};
+\node[right=0.1cm of figures, below=0.6cm of figures, font=\scriptsize, text=purple!70] {Purple = Analysis};
+
+\end{tikzpicture}

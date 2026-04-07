@@ -1,0 +1,22 @@
+\textbf{Objective:}
+Large language models (LLMs) are increasingly used by medical students as study aids for high-stakes licensing examinations. Yet systematic, multi-model comparisons on both United States Medical Licensing Examination (USMLE) Step 1 and Step 2 Clinical Knowledge (CK) questions remain limited, and no prior work has examined performance from the perspective of international medical graduate (IMG) students who face unique challenges related to US-centric clinical assumptions. This study aimed to evaluate and compare eight frontier LLMs—GPT-4o, GPT-4o-mini, Claude 3.5 Sonnet, Claude 3 Haiku, Gemini 1.5 Pro, Gemini 1.5 Flash, Llama 3.3 70B, and DeepSeek R1 Distill Llama 70B—on USMLE Step 1 and Step 2 CK-style questions, with particular attention to performance gaps relevant to IMG students.
+
+\textbf{Methods:}
+We constructed a stratified sample of 200 questions drawn from the publicly available MedQA-USMLE dataset (100 Step 1; 100 Step 2 CK), stratified by medical subject and difficulty level using a fixed random seed to ensure reproducibility. Each question was presented to all eight models using a standardized zero-shot, chain-of-thought-eliciting prompt at temperature 0. Primary outcome was overall accuracy (proportion of questions answered correctly). Secondary analyses included accuracy by medical subject, difficulty level, question type, and exam step. Questions with US healthcare system-specific content were automatically tagged as IMG-relevant using a keyword lexicon validated by the medical co-author, and accuracy gaps between IMG-relevant and non-IMG-relevant questions were quantified using Fisher's exact test. Expert annotation of model reasoning quality (1–5 scale) was performed by the medical co-author on a random subsample. Pairwise statistical comparisons between models used McNemar's test with Holm-Bonferroni correction for multiple comparisons. Effect sizes were computed using Cohen's h.
+
+\textbf{Results:}
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Overall accuracy ranged from XX\% (95\% CI [XX, XX]) for [lowest model]
+% to XX\% (95\% CI [XX, XX]) for [highest model]. Statistically significant differences
+% were observed between [models] (p < 0.05 after correction). Step 2 CK accuracy was
+% [higher/lower/equivalent] to Step 1 accuracy across all models. IMG-relevant questions
+% showed a mean accuracy gap of XX percentage points..."
+[Results to be reported after evaluation pipeline is run.]
+
+\textbf{Conclusions:}
+% PLACEHOLDER: Discuss implications for IMG students using LLMs as study aids.
+% Template: "Frontier LLMs demonstrated [strong/variable] performance on USMLE-style
+% questions, with meaningful differences between models and across content areas.
+% IMG students should exercise particular caution when relying on these tools for
+% Step 2 CK preparation, given [observed gaps/patterns]."
+[Conclusions to be reported after evaluation pipeline is run.]

@@ -1,0 +1,46 @@
+# Dataset
+datasets>=2.20.0
+huggingface-hub>=0.23.0
+
+# LLM APIs
+openai>=1.50.0
+anthropic>=0.34.0
+google-generativeai>=0.7.0
+groq>=0.11.0
+
+# Data processing
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.5.0
+
+# Statistics
+scipy>=1.13.0
+statsmodels>=0.14.0
+pingouin>=0.5.4
+
+# Visualization
+matplotlib>=3.9.0
+seaborn>=0.13.0
+plotly>=5.22.0
+
+# NLP / similarity
+sentence-transformers>=3.0.0
+rouge-score>=0.1.2
+
+# Utilities
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+tenacity>=8.3.0
+diskcache>=5.6.0
+rich>=13.7.0
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-mock>=3.14.0
+
+# Docs
+mkdocs-material>=9.5.0
+mkdocs-minify-plugin>=0.8.0

@@ -1,0 +1,60 @@
+\section{Methodology}
+
+\subsection{Dataset}
+
+We used the MedQA-USMLE dataset in its four-option variant, available on HuggingFace as \texttt{GBaker/MedQA-USMLE-4-options} \parencite{jin2021medqa}. The dataset contains questions derived from publicly available USMLE practice materials and is distributed under a license permitting research use. All questions are formatted as single-best-answer multiple-choice items with four options (A–D). The combined train, validation, and test splits contain approximately 12,700 questions.
+
+\subsection{Stratified Sampling}
+
+To construct a manageable but representative evaluation set, we drew a stratified sample of 100 questions for USMLE Step 1 content and 100 questions for Step 2 CK content, for a total of 200 questions. Stratification proceeded in two stages: first by medical subject (proportional allocation across 15 subjects including Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Microbiology, Immunology, Behavioral Science, Biostatistics, Internal Medicine, Surgery, Pediatrics, Obstetrics \& Gynecology, Psychiatry, and Neurology), and then by difficulty level (balanced across easy, medium, and hard, as determined by question length heuristics validated against expert judgment). Exam step classification used a keyword-based heuristic: questions containing terms associated with clinical management and decision-making (e.g., ``next step,'' ``most appropriate management,'' ``hospitalized'') were classified as Step 2 CK; all others as Step 1. All sampling used a fixed random seed of 42 to ensure reproducibility. Sampled questions are stored as version-controlled JSON files in the repository.
+
+\subsection{Models Evaluated}
+
+We evaluated eight LLMs spanning four providers. Table~\ref{tab:models} summarizes the models, their providers, approximate parameter counts where publicly available, and cost per 1,000 tokens.
+
+\begin{table}[htbp]
+\centering
+\caption{Models Evaluated in This Study}
+\label{tab:models}
+\begin{tabular}{llll}
+\toprule
+Model & Provider & Parameters & Cost (Input / Output per 1K tokens) \\
+\midrule
+GPT-4o & OpenAI & Not disclosed & \$0.005 / \$0.015 \\
+GPT-4o-mini & OpenAI & Not disclosed & \$0.00015 / \$0.0006 \\
+Claude 3.5 Sonnet & Anthropic & Not disclosed & \$0.003 / \$0.015 \\
+Claude 3 Haiku & Anthropic & Not disclosed & \$0.00025 / \$0.00125 \\
+Gemini 1.5 Pro & Google & Not disclosed & \$0.00125 / \$0.005 \\
+Gemini 1.5 Flash & Google & Not disclosed & \$0.000075 / \$0.0003 \\
+Llama 3.3 70B & Meta (via Groq) & 70B & Free (Groq tier) \\
+DeepSeek R1 Distill 70B & DeepSeek (via Groq) & 70B & Free (Groq tier) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Prompt Design}
+
+All models received identical prompts. We employed a zero-shot chain-of-thought format that instructed the model to reason step by step and conclude with an explicit answer declaration (\texttt{ANSWER: [A/B/C/D]}). The full prompt template is reproduced in Appendix~A. Temperature was set to 0 for all models to maximize response reproducibility. No few-shot examples were provided; this design choice was made to reflect the natural use case of students asking an LLM a question without prior demonstration, and to ensure that performance differences reflect model capability rather than prompt engineering advantages.
+
+\subsection{Evaluation Metrics}
+
+The primary metric was \textit{accuracy}: the proportion of questions for which the model's selected answer matched the ground-truth answer key. We computed 95\% confidence intervals using the normal approximation to the binomial. Secondary metrics included accuracy stratified by (1) medical subject, (2) difficulty level, (3) question type (clinical vignette, laboratory data, single best answer), and (4) exam step (Step 1 vs.\ Step 2 CK). Expert reasoning quality was scored on a 1–5 scale by the medical co-author for a random subsample of 50 answer chains per model.
+
+\subsection{IMG Relevance Tagging}
+
+We developed a keyword lexicon of 15 terms associated with US-centric healthcare content (full list in Appendix~D), including references to specific US insurance programs (Medicaid, Medicare), US-specific brand-name drugs, US professional guidelines bodies (ACIP, USPSTF), and healthcare system concepts unfamiliar in most non-US contexts (prior authorization, HMO/PPO). Questions were tagged as \textit{IMG-relevant} if any keyword appeared in the question stem or answer choices. This automated tagging was subsequently validated by the medical co-author, who reviewed a random 20\% subsample and confirmed the classification for each.
+
+\subsection{Statistical Analysis}
+
+Pairwise model comparisons used McNemar's test for paired binary outcomes, appropriate because each model answered the same set of questions, creating a natural within-question pairing. The McNemar statistic and exact p-value were computed for all $\binom{8}{2} = 28$ model pairs. To control the family-wise error rate across 28 simultaneous tests, we applied the Holm-Bonferroni step-down correction. Effect sizes for pairwise comparisons were computed using Cohen's $h$ for the difference between two proportions. Subgroup differences within models (e.g., subject or difficulty) were tested using chi-square tests of independence. All analyses were conducted in Python using \texttt{scipy}, \texttt{statsmodels}, and \texttt{pandas}.
+
+\subsection{Reproducibility and Cost}
+
+All API responses were cached to disk using \texttt{diskcache} to prevent redundant API calls. Total API cost was logged per model per run. The full codebase, sampled question files, and result JSONs (excluding API keys) are available at the project repository. Figure~\ref{fig:pipeline} illustrates the evaluation pipeline.
+
+\begin{figure}[htbp]
+\centering
+\input{figures/pipeline_diagram}
+\caption{Overview of the evaluation pipeline. MedQA questions are stratified and sampled, presented to eight LLMs via a standardized prompt, and evaluated for accuracy and reasoning quality. Statistical analyses and IMG gap analyses are performed on the aggregated results.}
+\label{fig:pipeline}
+\end{figure}

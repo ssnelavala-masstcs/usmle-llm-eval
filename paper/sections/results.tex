@@ -1,0 +1,158 @@
+\section{Results}
+
+\subsection{Overall Accuracy by Model}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Table X presents overall accuracy for each model on the combined 200-question
+% sample. Accuracy ranged from XX% (95% CI [XX, XX]) for [model] to XX% (95% CI [XX, XX])
+% for [model]. All frontier models exceeded the nominal USMLE passing threshold of 60%,
+% while [open-source models] [did/did not]."
+
+\begin{table}[htbp]
+\centering
+\caption{Overall Model Accuracy on USMLE-Style Questions (N = 200)}
+\label{tab:overall_accuracy}
+\begin{tabular}{lrrrr}
+\toprule
+Model & N & Correct & Accuracy & 95\% CI \\
+\midrule
+GPT-4o & 200 & -- & -- & -- \\
+GPT-4o-mini & 200 & -- & -- & -- \\
+Claude 3.5 Sonnet & 200 & -- & -- & -- \\
+Claude 3 Haiku & 200 & -- & -- & -- \\
+Gemini 1.5 Pro & 200 & -- & -- & -- \\
+Gemini 1.5 Flash & 200 & -- & -- & -- \\
+Llama 3.3 70B & 200 & -- & -- & -- \\
+DeepSeek R1 Distill 70B & 200 & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Step 1 versus Step 2 CK}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Across all models, accuracy on Step 2 CK questions was [higher/lower] than
+% on Step 1 questions (mean difference = XX percentage points; range XX–XX). This
+% [was/was not] consistent across all eight models."
+
+\begin{table}[htbp]
+\centering
+\caption{Accuracy by Exam Step}
+\label{tab:accuracy_by_step}
+\begin{tabular}{lcccc}
+\toprule
+Model & Step 1 Acc. & Step 1 95\% CI & Step 2 CK Acc. & Step 2 CK 95\% CI \\
+\midrule
+GPT-4o & -- & -- & -- & -- \\
+GPT-4o-mini & -- & -- & -- & -- \\
+Claude 3.5 Sonnet & -- & -- & -- & -- \\
+Claude 3 Haiku & -- & -- & -- & -- \\
+Gemini 1.5 Pro & -- & -- & -- & -- \\
+Gemini 1.5 Flash & -- & -- & -- & -- \\
+Llama 3.3 70B & -- & -- & -- & -- \\
+DeepSeek R1 Distill 70B & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Subject-Level Analysis}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Figure X presents a heatmap of model accuracy by medical subject.
+% Performance was highest in [subject] (mean accuracy = XX%) and lowest in [subject]
+% (mean accuracy = XX%). Notable patterns included..."
+
+Subject-level accuracy varied substantially across models and disciplines. A heatmap of model-by-subject accuracy is presented in Figure~2 (to be generated after evaluation). Chi-square tests of the accuracy-by-subject contingency table were conducted for each model to assess whether subject explained significant variance in accuracy (results to be reported).
+
+\subsection{Difficulty Analysis}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "As expected, accuracy decreased with increasing question difficulty across
+% all models. The performance gap between easy and hard questions ranged from XX to XX
+% percentage points."
+
+\begin{table}[htbp]
+\centering
+\caption{Accuracy by Difficulty Level}
+\label{tab:accuracy_by_difficulty}
+\begin{tabular}{lccc}
+\toprule
+Model & Easy & Medium & Hard \\
+\midrule
+GPT-4o & -- & -- & -- \\
+GPT-4o-mini & -- & -- & -- \\
+Claude 3.5 Sonnet & -- & -- & -- \\
+Claude 3 Haiku & -- & -- & -- \\
+Gemini 1.5 Pro & -- & -- & -- \\
+Gemini 1.5 Flash & -- & -- & -- \\
+Llama 3.3 70B & -- & -- & -- \\
+DeepSeek R1 Distill 70B & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{IMG Perspective Analysis}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "XX questions (XX%) in the combined sample were tagged as IMG-relevant
+% by the automated keyword lexicon, a classification validated by the medical co-author
+% with XX% agreement. Across models, accuracy on IMG-relevant questions was XX percentage
+% points lower than on non-IMG questions (mean gap = XX%; range XX–XX%). This gap
+% [was/was not] statistically significant for [models] (Fisher's exact test, p < 0.05)."
+
+\begin{table}[htbp]
+\centering
+\caption{IMG-Relevant vs.\ Non-IMG Accuracy Gap by Model}
+\label{tab:img_gap}
+\begin{tabular}{lccccl}
+\toprule
+Model & IMG Acc. & Non-IMG Acc. & Gap & \textit{p}-value & Significant \\
+\midrule
+GPT-4o & -- & -- & -- & -- & -- \\
+GPT-4o-mini & -- & -- & -- & -- & -- \\
+Claude 3.5 Sonnet & -- & -- & -- & -- & -- \\
+Claude 3 Haiku & -- & -- & -- & -- & -- \\
+Gemini 1.5 Pro & -- & -- & -- & -- & -- \\
+Gemini 1.5 Flash & -- & -- & -- & -- & -- \\
+Llama 3.3 70B & -- & -- & -- & -- & -- \\
+DeepSeek R1 Distill 70B & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pairwise Statistical Comparisons}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Pairwise McNemar tests (Holm-Bonferroni corrected) identified X statistically
+% significant performance differences among the 28 model pairs. [Model A] significantly
+% outperformed [Model B] (p_adjusted = XX, Cohen's h = XX)."
+
+Pairwise McNemar test results will be reported here after running the evaluation pipeline.
+
+\subsection{Expert Annotation Results}
+
+% PLACEHOLDER: Replace with actual results after running evaluation pipeline.
+% Template: "Expert annotation scores (1–5) for model reasoning quality are presented
+% in Table X. Scores were highest for [model] (mean = X.X, SD = X.X) and lowest for
+% [model] (mean = X.X, SD = X.X). Inter-rater reliability for the double-coded subsample
+% was ICC = X.XX (95% CI [X.XX, X.XX]), indicating [excellent/good/fair] agreement."
+
+\begin{table}[htbp]
+\centering
+\caption{Expert Annotation Results (Reasoning Quality, Scale 1--5)}
+\label{tab:expert_scores}
+\begin{tabular}{lccl}
+\toprule
+Model & Mean Score & SD & IMG Bias Detected (\%) \\
+\midrule
+GPT-4o & -- & -- & -- \\
+GPT-4o-mini & -- & -- & -- \\
+Claude 3.5 Sonnet & -- & -- & -- \\
+Claude 3 Haiku & -- & -- & -- \\
+Gemini 1.5 Pro & -- & -- & -- \\
+Gemini 1.5 Flash & -- & -- & -- \\
+Llama 3.3 70B & -- & -- & -- \\
+DeepSeek R1 Distill 70B & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

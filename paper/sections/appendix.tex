@@ -1,0 +1,99 @@
+\section{Appendix A: Full Prompt Template}
+
+The following prompt was used verbatim for all eight models. The \texttt{\{step\}} placeholder was replaced with either ``Step 1'' or ``Step 2 CK''; the \texttt{\{question\}} and \texttt{\{options\}} placeholders were filled from the dataset.
+
+\begin{verbatim}
+You are taking the USMLE {step} examination.
+
+Question:
+{question}
+
+Options:
+A. {option_A}
+B. {option_B}
+C. {option_C}
+D. {option_D}
+
+Instructions:
+- Think through this carefully, step by step.
+- Consider all options before deciding.
+- State your final answer as: ANSWER: [A/B/C/D]
+- The ANSWER line must be the last thing you write.
+\end{verbatim}
+
+Temperature was set to 0 for all calls. No system prompt was used. No few-shot examples were provided.
+
+\section{Appendix B: Subject Distribution of Sampled Questions}
+
+\begin{table}[htbp]
+\centering
+\caption{Subject Distribution in Stratified Sample}
+\label{tab:subject_distribution}
+\begin{tabular}{lcc}
+\toprule
+Subject & Step 1 (N=100) & Step 2 CK (N=100) \\
+\midrule
+Anatomy & -- & -- \\
+Physiology & -- & -- \\
+Biochemistry & -- & -- \\
+Pharmacology & -- & -- \\
+Pathology & -- & -- \\
+Microbiology & -- & -- \\
+Immunology & -- & -- \\
+Behavioral Science & -- & -- \\
+Biostatistics & -- & -- \\
+Internal Medicine & -- & -- \\
+Surgery & -- & -- \\
+Pediatrics & -- & -- \\
+Obstetrics \& Gynecology & -- & -- \\
+Psychiatry & -- & -- \\
+Neurology & -- & -- \\
+\midrule
+Total & 100 & 100 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% PLACEHOLDER: Replace -- values with actual counts after running 02_sample_questions.py
+% and inspecting data/sampled/sample_metadata.json.
+
+\section{Appendix C: Expert Annotation Rubric}
+
+The following 1–5 scale was used by the medical co-author (Blessie [Last Name]) to score model reasoning quality. % TODO: Replace [Last Name]
+
+\begin{description}
+    \item[1 — Completely wrong reasoning] The model's reasoning demonstrates a fundamental misunderstanding of the medical concept. The selected answer is incorrect and the reasoning, if applied clinically, would be dangerous.
+    \item[2 — Mostly wrong] The model identifies some relevant concepts but reaches an incorrect conclusion due to significant errors in reasoning. The answer is wrong and the reasoning shows a substantial gap in medical knowledge.
+    \item[3 — Partially correct] The model demonstrates some valid reasoning and may identify the correct differentials or principles, but makes a key error that leads to an incorrect or partially correct conclusion. The answer may be correct for the wrong reason.
+    \item[4 — Mostly correct] The model demonstrates sound medical reasoning with only minor gaps or imprecisions. The answer is correct and the reasoning would be appropriate in a clinical education context with minor caveats.
+    \item[5 — Excellent] The model's reasoning is clinically appropriate, well-organized, and demonstrates an understanding of the question that would be expected of a well-prepared medical student or physician. The answer is correct and the reasoning adds genuine educational value.
+\end{description}
+
+Additionally, annotators recorded:
+\begin{itemize}
+    \item \textbf{img\_bias\_detected} (yes/no): Whether the model's reasoning reflected assumptions specific to the US healthcare system that would be unfamiliar or misleading for non-US-trained physicians.
+    \item \textbf{expert\_notes}: Free-text notes on patterns, errors, or observations not captured by the numeric score.
+\end{itemize}
+
+\section{Appendix D: US-Centric Keywords Used for IMG Tagging}
+
+The following keywords were used to automatically tag questions as IMG-relevant. A question was tagged if any keyword appeared in the question stem or any answer option (case-insensitive matching).
+
+\begin{table}[htbp]
+\centering
+\caption{US-Centric Keyword Lexicon for IMG Tagging}
+\label{tab:img_keywords}
+\begin{tabular}{ll}
+\toprule
+Category & Keywords \\
+\midrule
+Insurance / Financing & medicaid, medicare, insurance, prior authorization, hmo, ppo \\
+Referral / Access & primary care physician, referral, emergency medical treatment \\
+US Brand-Name Drugs & tylenol, advil, motrin, zofran, ambien, ativan \\
+US Guidelines Bodies & acip, uspstf, ama guidelines, joint commission \\
+US Demographic Contexts & inner city, rural clinic, community health center \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This lexicon is conservative by design and likely undercounts IMG-relevant questions. Future work should expand the lexicon through systematic review by physicians trained in non-US medical systems.

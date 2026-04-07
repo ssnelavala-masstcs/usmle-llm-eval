@@ -1,0 +1,45 @@
+\documentclass[man, 12pt]{apa7}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=apa, sortcites=true, sorting=nyt, backend=biber]{biblatex}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds}
+\addbibresource{references.bib}
+
+\title{Large Language Model Performance on USMLE-Style Questions:
+       A Systematic Evaluation with Implications for International Medical Graduates}
+
+\authorsnames{Stanley Sujith Nelavala, Blessie [Last Name]}  % TODO: Replace [Last Name]
+\authorsaffiliations{
+  Department of Computer Science, University of Minnesota Duluth;
+  [Blessie's Department and Institution]  % TODO: Replace with actual affiliation
+}
+
+\leftheader{LLM PERFORMANCE ON USMLE}
+
+\abstract{\input{sections/abstract}}
+
+\keywords{large language models, USMLE, medical education, GPT-4, Claude,
+          Gemini, Llama, DeepSeek, international medical graduates,
+          natural language processing, artificial intelligence}
+
+\begin{document}
+\maketitle
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/methodology}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\printbibliography
+\appendix
+\input{sections/appendix}
+\end{document}

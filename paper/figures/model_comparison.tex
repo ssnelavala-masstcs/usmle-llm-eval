@@ -1,0 +1,40 @@
+% Placeholder: Model comparison bar chart (pgfplots)
+% Replace data with actual results after running evaluation pipeline.
+\begin{tikzpicture}
+\begin{axis}[
+    xbar,
+    xlabel={Accuracy (\%)},
+    symbolic y coords={
+        DeepSeek R1 70B,
+        Llama 3.3 70B,
+        Gemini Flash,
+        Claude Haiku,
+        GPT-4o-mini,
+        Gemini Pro,
+        Claude Sonnet,
+        GPT-4o
+    },
+    ytick=data,
+    xmin=0, xmax=100,
+    bar width=8pt,
+    nodes near coords,
+    nodes near coords align={horizontal},
+    font=\small,
+    width=10cm,
+    height=7cm,
+    title={Model Accuracy on USMLE-Style Questions},
+    title style={font=\bfseries\small},
+]
+% PLACEHOLDER: Replace 0 values with actual accuracy × 100
+\addplot coordinates {
+    (0, DeepSeek R1 70B)
+    (0, Llama 3.3 70B)
+    (0, Gemini Flash)
+    (0, Claude Haiku)
+    (0, GPT-4o-mini)
+    (0, Gemini Pro)
+    (0, Claude Sonnet)
+    (0, GPT-4o)
+};
+\end{axis}
+\end{tikzpicture}
