@@ -55,6 +55,6 @@ Filter to Step 1 and Step 2 CK. Sample 100 questions each, stratified by subject
 
 ## Known TODOs
 - Replace [Last Name] placeholders with Blessie's actual name
-- Replace [github-username] placeholders with actual GitHub username
+- Replace ssnelavala-masstcs placeholders with actual GitHub username
 - Fill in Results section after running evaluation
 - Add Blessie's institution affiliation to paper/main.tex

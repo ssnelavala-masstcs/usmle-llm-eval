@@ -13,7 +13,7 @@ This guide walks you through setting up the project and running the full evaluat
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/[github-username]/usmle-llm-eval  # TODO: Replace URL
+git clone https://github.com/ssnelavala-masstcs/usmle-llm-eval  # TODO: Replace URL
 cd usmle-llm-eval
 ```
 

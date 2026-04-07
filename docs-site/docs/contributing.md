@@ -3,7 +3,7 @@
 ## Development Setup
 
 ```bash
-git clone https://github.com/[github-username]/usmle-llm-eval  # TODO: Replace URL
+git clone https://github.com/ssnelavala-masstcs/usmle-llm-eval  # TODO: Replace URL
 cd usmle-llm-eval
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt

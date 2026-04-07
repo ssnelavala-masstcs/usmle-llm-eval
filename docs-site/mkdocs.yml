@@ -1,10 +1,10 @@
 site_name: USMLE LLM Evaluation
 site_description: Systematic evaluation of LLM performance on USMLE Step 1 and Step 2 CK questions
 site_author: Stanley Nelavala & Blessie [Last Name]  # TODO: Replace [Last Name]
-site_url: https://[github-username].github.io/usmle-llm-eval/  # TODO: Replace [github-username]
+site_url: https://ssnelavala-masstcs.github.io/usmle-llm-eval/  # TODO: Replace ssnelavala-masstcs
 
 repo_name: usmle-llm-eval
-repo_url: https://github.com/[github-username]/usmle-llm-eval  # TODO: Replace [github-username]
+repo_url: https://github.com/ssnelavala-masstcs/usmle-llm-eval  # TODO: Replace ssnelavala-masstcs
 
 theme:
   name: material

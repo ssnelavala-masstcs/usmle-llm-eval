@@ -9,7 +9,7 @@ Systematic evaluation of large language model performance on USMLE Step 1 and St
 ## Quick Start
 
 ```bash
-git clone https://github.com/[github-username]/usmle-llm-eval  # TODO: Replace with actual URL
+git clone https://github.com/ssnelavala-masstcs/usmle-llm-eval  # TODO: Replace with actual URL
 cd usmle-llm-eval
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
@@ -35,7 +35,7 @@ python scripts/06_export_results.py
 | DeepSeek R1 Distill 70B | Groq (free) | Reasoning model |
 
 ## Docs
-See the [full documentation site](https://[github-username].github.io/usmle-llm-eval/) <!-- TODO -->
+See the [full documentation site](https://ssnelavala-masstcs.github.io/usmle-llm-eval/) <!-- TODO -->
 
 ## Paper
 Targeting JMIR Medical Education. Preprint link: <!-- TODO: Add when available -->
