@@ -1,8 +1,11 @@
 pdf:
-	latexmk -pdf -biber main.tex
+	pdflatex -interaction=nonstopmode main.tex
+	biber main
+	pdflatex -interaction=nonstopmode main.tex
+	pdflatex -interaction=nonstopmode main.tex
 
 watch:
-	latexmk -pdf -biber -pvc main.tex
+	latexmk -pdf -pvc main.tex
 
 clean:
 	latexmk -C

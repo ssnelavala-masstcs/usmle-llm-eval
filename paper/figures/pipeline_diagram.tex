@@ -1,57 +1,39 @@
-% TikZ evaluation pipeline diagram
-% Include in main.tex via \input{figures/pipeline_diagram}
+% Evaluation pipeline diagram
 \begin{tikzpicture}[
-    node distance=1.2cm and 1.8cm,
-    box/.style={rectangle, rounded corners=4pt, minimum width=2.8cm, minimum height=0.9cm,
-                text centered, font=\small, draw, thick},
+    node distance=1.0cm and 1.6cm,
+    every node/.style={font=\small},
+    box/.style={rectangle, rounded corners=3pt, minimum width=2.6cm,
+                minimum height=0.8cm, text centered, draw, thick,
+                text width=2.5cm},
     databox/.style={box, fill=blue!15, draw=blue!60},
     modelbox/.style={box, fill=green!15, draw=green!60},
     scorebox/.style={box, fill=orange!15, draw=orange!60},
     analysisbox/.style={box, fill=purple!15, draw=purple!60},
-    arrow/.style={-Stealth, thick},
+    arr/.style={-Stealth, thick},
 ]
 
-% Data stage (left column)
-\node[databox] (medqa) {MedQA Dataset\\(HuggingFace)};
-\node[databox, below=of medqa] (sampler) {Stratified\\Sampler};
-\node[databox, below=of sampler] (questions) {200 Questions\\(100 Step 1,\\100 Step 2 CK)};
+\node[databox] (medqa)   {MedQA\\HuggingFace};
+\node[databox, right=of medqa]  (sampler) {Stratified\\Sampler};
+\node[databox, right=of sampler] (qs)     {200 Questions\\Step1 + Step2CK};
 
-% Model stage (center column)
-\node[modelbox, right=of sampler] (prompt) {Standardized\\Zero-Shot Prompt\\(temperature=0)};
-\node[modelbox, above=0.6cm of prompt] (models) {8 LLMs\\GPT-4o, Claude, Gemini,\\Llama, DeepSeek};
-\node[modelbox, below=0.6cm of prompt] (response) {Response +\\Selected Answer\\(A/B/C/D)};
+\node[modelbox, below=1.2cm of sampler] (prompt) {Standardized\\Prompt (T=0)};
+\node[modelbox, left=of prompt]  (models) {8 LLMs\\GPT/Claude/Gemini\\Llama/DeepSeek};
+\node[modelbox, right=of prompt] (resp)   {Response\\+ Answer};
 
-% Scoring stage (right column)
-\node[scorebox, right=of prompt] (scorer) {Accuracy\\Scorer};
-\node[scorebox, above=0.6cm of scorer] (cache) {Disk Cache\\(diskcache)};
-\node[scorebox, below=0.6cm of scorer] (expert) {Expert Annotator\\(Blessie)\\Score 1--5};
+\node[scorebox, below=1.2cm of prompt]  (scorer) {Accuracy\\Scorer};
+\node[scorebox, left=of scorer]  (cache)  {Disk Cache};
+\node[scorebox, right=of scorer] (expert) {Expert\\Annotator};
 
-% Analysis stage (bottom)
-\node[analysisbox, below=2.5cm of prompt] (stats) {Statistical Analysis:\\McNemar · Chi-square\\Holm-Bonferroni · Cohen's h};
-\node[analysisbox, left=1.2cm of stats] (imganalysis) {IMG Gap\\Analysis};
-\node[analysisbox, right=1.2cm of stats] (figures) {Paper Figures\\\& LaTeX Tables};
+\node[analysisbox, below=1.2cm of scorer] (stats) {Statistical Analysis\\McNemar + IMG Gap};
 
-% Arrows — data stage
-\draw[arrow] (medqa) -- (sampler);
-\draw[arrow] (sampler) -- (questions);
-\draw[arrow] (questions) -- (prompt);
-
-% Arrows — model stage
-\draw[arrow] (models) -- (prompt);
-\draw[arrow] (prompt) -- (response);
-\draw[arrow] (response) -- (scorer);
-\draw[arrow, dashed] (scorer) -- (cache);
-
-% Arrows — to analysis
-\draw[arrow] (scorer) -- (stats);
-\draw[arrow] (expert) -- (stats);
-\draw[arrow] (stats) -- (imganalysis);
-\draw[arrow] (stats) -- (figures);
-
-% Legend
-\node[below=0.3cm of figures, font=\scriptsize, text=blue!70] {Blue = Data};
-\node[right=0.1cm of figures, below=0.3cm of figures, font=\scriptsize, text=green!60!black] {Green = Models};
-\node[below=0.6cm of figures, font=\scriptsize, text=orange!80!black] {Orange = Scoring};
-\node[right=0.1cm of figures, below=0.6cm of figures, font=\scriptsize, text=purple!70] {Purple = Analysis};
+\draw[arr] (medqa)   -- (sampler);
+\draw[arr] (sampler) -- (qs);
+\draw[arr] (qs)      -- (prompt);
+\draw[arr] (models)  -- (prompt);
+\draw[arr] (prompt)  -- (resp);
+\draw[arr] (resp)    -- (scorer);
+\draw[arr, dashed] (scorer) -- (cache);
+\draw[arr] (scorer)  -- (stats);
+\draw[arr] (expert)  -- (stats);
 
 \end{tikzpicture}
